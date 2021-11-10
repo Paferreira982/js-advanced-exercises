@@ -9,7 +9,7 @@
 </head>
 
 <script>
-    window.onload(function (){
+    window.onload = function() {
         if (JSON.parse(localStorage.getItem("users")) == null) {
             let users = [];
             let defaultUser =  {
@@ -21,7 +21,7 @@
             users.push(defaultUser);
             localStorage.setItem("users", JSON.stringify(users));
         }
-    });
+    };
 </script>
 
 <body>
@@ -33,7 +33,7 @@
 
     <button onclick="logar()">Logar</button> <br>
 
-    <script src="js1.js"></script>
+    <script src="./js/user-control.js"></script>
 </body>
 
 </html>
