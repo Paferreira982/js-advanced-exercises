@@ -20,7 +20,36 @@ function buscar() {
 
 function editar() {
     let searchedUser = JSON.parse(sessionStorage.getItem("searchedUser"));
-    excluir(searchedUser);
+    let nome = document.getElementById("nome").value;
+    let senha = document.getElementById("senha").value;
+    let role = document.getElementById("role").value;
+
+    let users = deletar(searchedUser);
+
+    let user = {
+        id: searchedUser.id,
+        nome: nome, 
+        senha: senha,
+        role: role
+    };
+
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    console.log(JSON.parse(localStorage.getItem("users")))
+}
+
+function deletar(user) {
+    let users = JSON.parse(localStorage.getItem("users"));
+
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].nome == user.nome) {
+            users.splice(i,1);
+            localStorage.setItem("users", JSON.stringify(users));
+            break;
+        }
+    }
+
+    return users;
 }
 
 function excluir(user) {
@@ -32,11 +61,9 @@ function excluir(user) {
             localStorage.setItem("users", JSON.stringify(users));
             document.getElementById("form-container").style.display = "none";
             clearSearchedUserFromSession();
-            console.log("Usuário Removido");
             return;
         }
     }
-    console.log("Usuário não removido");
 }
 
 function locateByName(nameSearched) {
