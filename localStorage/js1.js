@@ -12,8 +12,8 @@ function cadastrar() {
     if (users == null) {
         users = [];
     } else {
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].email == user.email) {
+        for (auxUser in users) {
+            if (auxUser.email == user.email) {
                 console.log("Usuário ja cadastrado.")
                 return;
             }
@@ -34,12 +34,11 @@ function logar() {
     if (users == null) {
         console.log("Não há nenhum usuário cadastrado.");
     } else {
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].email == user.email) {
-                if (users[i].senha == user.senha) {
-                    console.log("Login bem sucedido");
-                    return;
-                }
+        for (auxUser in users) {
+            if (auxUser.email == user.email && auxUser.senha == user.senha) {
+                localStorage.setItem("loggedUser", JSON.stringify(auxUser));
+                console.log("Login bem sucedido");
+                return;
             }
         }
         console.log("Email ou senha inválidos.")

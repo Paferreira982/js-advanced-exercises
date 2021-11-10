@@ -22,10 +22,10 @@
         if (users == null) {
             allUsers.innerHTML = "Nenhum usuário cadastrado";
         } else {
-            for (let i = 0; i < users.length; i++) {
-                text += "<br> Email: " + users[i].email + " // Senha: " + users[i].senha;
+            for (auxUser in users) {
+                text += "<br> Email: " + auxUser.email + " // Senha: " + auxUser.senha;
             }
-    
+
             allUsers.innerHTML = text;
         }
     </script>
