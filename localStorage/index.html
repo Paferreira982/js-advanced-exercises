@@ -9,7 +9,19 @@
 </head>
 
 <script>
-    
+    window.onload(function (){
+        if (JSON.parse(localStorage.getItem("users")) == null) {
+            let users = [];
+            let defaultUser =  {
+                email: "root", 
+                senha: "root",
+                role: "admin"
+            };
+
+            users.push(defaultUser);
+            localStorage.setItem("users", JSON.stringify(users));
+        }
+    });
 </script>
 
 <body>

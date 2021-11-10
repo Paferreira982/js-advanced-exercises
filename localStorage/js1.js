@@ -1,5 +1,3 @@
-let users = JSON.parse(localStorage.getItem("users"));
-
 function cadastrar() {
     let email = document.getElementById("email").value;
     let senha = document.getElementById("senha").value;
@@ -11,14 +9,10 @@ function cadastrar() {
         role: permissao
     };
 
-    if (users == null) {
-        users = [];
-    } else {
-        for (auxUser in users) {
-            if (auxUser.email == user.email) {
-                console.log("Usuário ja cadastrado.")
-                return;
-            }
+    for (auxUser in users) {
+        if (auxUser.email == user.email) {
+            console.log("Usuário ja cadastrado.")
+            return;
         }
     }
 
@@ -28,24 +22,23 @@ function cadastrar() {
 }
 
 function logar() {
+    let users = JSON.parse(localStorage.getItem("users"));
     let email = document.getElementById("email").value;
     let senha = document.getElementById("senha").value;
-    
+
     let user = {
         email: email, 
         senha: senha
     };
 
-    if (users == null) {
-        console.log("Não há nenhum usuário cadastrado.");
-    } else {
-        for (auxUser in users) {
-            if (auxUser.email == user.email && auxUser.senha == user.senha) {
-                localStorage.setItem("loggedUser", JSON.stringify(auxUser));
-                console.log("Login bem sucedido");
-                return;
-            }
+    for (auxUser in users) {
+        if (auxUser.email == user.email && auxUser.senha == user.senha) {
+            localStorage.setItem("loggedUser", JSON.stringify(auxUser));
+            console.log("Login bem sucedido");
+            window.location.replace("./home.html");
+            return;
         }
-        console.log("Email ou senha inválidos.")
     }
+    console.log("Email ou senha inválidos.");
+
 }
