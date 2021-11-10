@@ -4,9 +4,12 @@ let email = document.getElementById("email").value;
 let senha = document.getElementById("senha").value;
 
 function cadastrar() {
+    let permissao = document.getElementById("role").value;
+
     let user = {
         email: email, 
-        senha: senha
+        senha: senha,
+        role: permissao
     };
 
     if (users == null) {
