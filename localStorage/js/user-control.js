@@ -1,4 +1,5 @@
 function cadastrar() {
+    let users = JSON.parse(localStorage.getItem("users"));
     let email = document.getElementById("email").value;
     let senha = document.getElementById("senha").value;
     let permissao = document.getElementById("role").value;
@@ -33,7 +34,7 @@ function logar() {
 
     users.forEach(auxUser => {
         if (auxUser.email == user.email && auxUser.senha == user.senha) {
-            localStorage.setItem("loggedUser", JSON.stringify(auxUser));
+            sessionStorage.setItem("loggedUser", JSON.stringify(auxUser));
             console.log("Login bem sucedido");
             window.location.replace("./home.html");
             return;

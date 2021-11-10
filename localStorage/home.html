@@ -6,30 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="./css/home.css">
 </head>
-
-<script>
-    window.onload = function() {
-        let loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
-        if (loggedUser == null) {
-            console.log("Nenhum Usuário logado, redirecionado para a tela de login.");
-            window.location.replace("./login.html");
-        } else {
-            if (loggedUser.role == "admin") {
-                let adminAreas = document.getElementsByClassName("role-admin");
-
-                for (let i = 0; i < adminAreas.length; i++)
-                    adminAreas[i].removeAttribute("style")
-            }
-        }
-    };
-</script>
 
 <body>
     <h1>Está é a home do projeto!</h1> <br> <br>
 
     <a class="role-admin" href="cadastrar.html">Cadastrar novos usuários</a> <br>
-    <a class="role-admin" href="listUsers.html">Listar todos os usuários</a>
+    <a class="role-admin" href="listUsers.html">Listar todos os usuários</a> <br>
+    <a href="index.html">Logout</a>
+
+    <script src="./js/access-control.js"></script>
 </body>
 
 </html>
