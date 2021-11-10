@@ -3,7 +3,7 @@ let allUsers = document.getElementById("all-users");
 let text = "";
 
 users.forEach(auxUser => {
-    text += "<br> Id: " + auxUser.id + "// Email: " + auxUser.email + " // Senha: " + auxUser.senha + " // Role: " + auxUser.role;
+    text += "<br> Id: " + auxUser.id + "// Nome: " + auxUser.nome + " // Senha: " + auxUser.senha + " // Role: " + auxUser.role;
 });
 
 allUsers.innerHTML = text;
