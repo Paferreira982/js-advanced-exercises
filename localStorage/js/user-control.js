@@ -9,12 +9,12 @@ function cadastrar() {
         role: permissao
     };
 
-    for (auxUser in users) {
+    users.forEach(auxUser => {
         if (auxUser.email == user.email) {
-            console.log("Usuário ja cadastrado.")
+            console.log("Usuário ja cadastrado.");
             return;
         }
-    }
+    });
 
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
@@ -31,14 +31,14 @@ function logar() {
         senha: senha
     };
 
-    for (auxUser in users) {
+    users.forEach(auxUser => {
         if (auxUser.email == user.email && auxUser.senha == user.senha) {
             localStorage.setItem("loggedUser", JSON.stringify(auxUser));
             console.log("Login bem sucedido");
             window.location.replace("./home.html");
             return;
         }
-    }
-    console.log("Email ou senha inválidos.");
+    });
 
+    console.log("Email ou senha inválidos.");
 }

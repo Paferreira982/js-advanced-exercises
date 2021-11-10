@@ -18,9 +18,8 @@
             if (loggedUser.role == "admin") {
                 let adminAreas = document.getElementsByClassName("role-admin");
 
-                for (aux in adminAreas)
-                    aux.removeAttribute("style")
-                
+                for (let i = 0; i < adminAreas.length; i++)
+                    adminAreas[i].removeAttribute("style")
             }
         }
     };
@@ -29,7 +28,8 @@
 <body>
     <h1>Está é a home do projeto!</h1> <br> <br>
 
-    <a class="role-admin" href="cadastrar.html" style="display: none;">Cadastrar novos usuários</a>
+    <a class="role-admin" href="cadastrar.html">Cadastrar novos usuários</a> <br>
+    <a class="role-admin" href="listUsers.html">Listar todos os usuários</a>
 </body>
 
 </html>

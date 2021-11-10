@@ -5,9 +5,9 @@ let text = "";
 if (users == null) {
     allUsers.innerHTML = "Nenhum usuário cadastrado";
 } else {
-    for (auxUser in users) {
+    users.forEach(auxUser => {
         text += "<br> Email: " + auxUser.email + " // Senha: " + auxUser.senha + " // Role: " + auxUser.role;
-    }
+    });
 
     allUsers.innerHTML = text;
 }
