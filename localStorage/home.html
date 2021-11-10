@@ -10,30 +10,26 @@
 
 <script>
     window.onload = function() {
-        if (JSON.parse(localStorage.getItem("users")) == null) {
-            let users = [];
-            let defaultUser =  {
-                email: "root", 
-                senha: "root",
-                role: "admin"
-            };
+        let loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+        if (loggedUser == null) {
+            console.log("Nenhum Usuário logado, redirecionado para a tela de login.");
+            window.location.replace("./login.html");
+        } else {
+            if (loggedUser.role == "admin") {
+                let adminAreas = document.getElementsByClassName("role-admin");
 
-            users.push(defaultUser);
-            localStorage.setItem("users", JSON.stringify(users));
+                for (aux in adminAreas)
+                    aux.removeAttribute("style")
+                
+            }
         }
     };
 </script>
 
 <body>
-    <label for="email">Email:</label>
-    <input id="email" type="email" required> <br>
+    <h1>Está é a home do projeto!</h1> <br> <br>
 
-    <label for="senha">Senha:</label>
-    <input id="senha" type="password"> <br>
-
-    <button onclick="logar()">Logar</button> <br>
-
-    <script src="js1.js"></script>
+    <a class="role-admin" href="cadastrar.html" style="display: none;">Cadastrar novos usuários</a>
 </body>
 
 </html>
