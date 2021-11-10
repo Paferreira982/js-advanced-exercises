@@ -4,7 +4,10 @@ function cadastrar() {
     let senha = document.getElementById("senha").value;
     let permissao = document.getElementById("role").value;
 
+    let userId = users.length;
+
     let user = {
+        id: userId,
         email: email, 
         senha: senha,
         role: permissao
