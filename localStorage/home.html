@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<script>
+    window.onload = function() {
+        if (JSON.parse(localStorage.getItem("users")) == null) {
+            let users = [];
+            let defaultUser =  {
+                email: "root", 
+                senha: "root",
+                role: "admin"
+            };
+
+            users.push(defaultUser);
+            localStorage.setItem("users", JSON.stringify(users));
+        }
+    };
+</script>
+
+<body>
+    <label for="email">Email:</label>
+    <input id="email" type="email" required> <br>
+
+    <label for="senha">Senha:</label>
+    <input id="senha" type="password"> <br>
+
+    <button onclick="logar()">Logar</button> <br>
+
+    <script src="js1.js"></script>
+</body>
+
+</html>
