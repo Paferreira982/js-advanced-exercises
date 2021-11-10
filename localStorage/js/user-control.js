@@ -35,14 +35,16 @@ function logar() {
         senha: senha
     };
 
+
+    let loguei = false;
     users.forEach(auxUser => {
         if (auxUser.nome == user.nome && auxUser.senha == user.senha) {
             sessionStorage.setItem("loggedUser", JSON.stringify(auxUser));
             console.log("Login bem sucedido");
             window.location.replace("./home.html");
-            return;
+            loguei = true;
         }
     });
 
-    alert("Nome ou senha inválidos.");
+    if (!loguei) alert("Nome ou senha inválidos.");
 }

@@ -12,7 +12,7 @@
 
 <body>
     <div>
-        <input type="text" id="searcher" placeholder="Digite o nome a ser buscado"> <br>
+        <input type="text" id="searcher" placeholder="Digite o nome a ser buscado">
         <button onclick="buscar()">Buscar</button>
     </div> <br>
 
@@ -30,10 +30,10 @@
         <input id="senha" type="password"> <br> <br>
 
         <button onclick="editar()">Editar</button>
-        <button onclick="excluir()">Excluir</button>
-    </div>  <br>
+        <button onclick="excluir(JSON.parse(sessionStorage.getItem('searchedUser')))">Excluir</button>
+    </div>  <br> <br> <br>
 
-    <a href="home.html" onclick="clearUserSearchedFromSession()">Home</a> <br>
+    <a href="home.html" onclick="clearSearchedUserFromSession()">Home</a> <br>
 
     <!-- <script src="./js/access-control.js"></script> -->
     <script src="./js/user-manager.js"></script>

@@ -1,5 +1,4 @@
 function buscar() {
-    clearUserSearchedFromSession();
     document.getElementById("form-container").style.display = "none";
 
     let nameSearched = document.getElementById("searcher").value;
@@ -13,17 +12,31 @@ function buscar() {
         document.getElementById("senha").value = user.senha;
         document.getElementById("role").value = user.role;
 
-    } else
+    } else {
+        clearSearchedUserFromSession();
         alert("Usuário não encontrado.");
-
+    }
 }
 
 function editar() {
-    let user
+    let searchedUser = JSON.parse(sessionStorage.getItem("searchedUser"));
+    excluir(searchedUser);
 }
 
-function excluir() {
-    
+function excluir(user) {
+    let users = JSON.parse(localStorage.getItem("users"));
+
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].nome == user.nome) {
+            users.splice(i,1);
+            localStorage.setItem("users", JSON.stringify(users));
+            document.getElementById("form-container").style.display = "none";
+            clearSearchedUserFromSession();
+            console.log("Usuário Removido");
+            return;
+        }
+    }
+    console.log("Usuário não removido");
 }
 
 function locateByName(nameSearched) {
@@ -38,6 +51,6 @@ function locateByName(nameSearched) {
     return user;
 }
 
-function clearUserSearchedFromSession() {
+function clearSearchedUserFromSession() {
     sessionStorage.removeItem("searchedUser");
 }
