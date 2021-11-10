@@ -15,7 +15,7 @@ function cadastrar() {
 
     users.forEach(auxUser => {
         if (auxUser.nome == user.nome) {
-            console.log("Usuário ja cadastrado.");
+            alert("Usuário ja cadastrado.");
             return;
         }
     });
@@ -44,5 +44,5 @@ function logar() {
         }
     });
 
-    console.log("Nome ou senha inválidos.");
+    alert("Nome ou senha inválidos.");
 }
