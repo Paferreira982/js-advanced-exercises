@@ -23,7 +23,7 @@
             allUsers.innerHTML = "Nenhum usuário cadastrado";
         } else {
             for (auxUser in users) {
-                text += "<br> Email: " + auxUser.email + " // Senha: " + auxUser.senha;
+                text += "<br> Email: " + auxUser.email + " // Senha: " + auxUser.senha + " // Role: " + auxUser.role;
             }
 
             allUsers.innerHTML = text;

@@ -1,9 +1,8 @@
 let users = JSON.parse(localStorage.getItem("users"));
 
-let email = document.getElementById("email").value;
-let senha = document.getElementById("senha").value;
-
 function cadastrar() {
+    let email = document.getElementById("email").value;
+    let senha = document.getElementById("senha").value;
     let permissao = document.getElementById("role").value;
 
     let user = {
@@ -29,6 +28,9 @@ function cadastrar() {
 }
 
 function logar() {
+    let email = document.getElementById("email").value;
+    let senha = document.getElementById("senha").value;
+    
     let user = {
         email: email, 
         senha: senha
