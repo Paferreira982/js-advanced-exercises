@@ -1,14 +1,13 @@
-window.onload = function() {
+$(document).ready(() => {
     let loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"));
-    if (loggedUser == null) {
-        console.log("Nenhum Usuário logado, redirecionado para a tela de login.");
-        window.location.replace("./index.html");
-    } else {
-        if (loggedUser.role == "admin") {
-            let adminAreas = document.getElementsByClassName("role-admin");
 
-            for (let i = 0; i < adminAreas.length; i++)
-                adminAreas[i].style.display = "inline-block";
+    if (loggedUser == null)
+        window.location.replace("./index.html");
+    else {
+        if (loggedUser.role == "admin") {
+            $(".role-admin").each(function(){
+                $(this).css("display","inline-block");
+            });
         }
     }
-};
+});

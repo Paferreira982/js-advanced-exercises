@@ -1,9 +1,10 @@
-let users = JSON.parse(localStorage.getItem("users"));
-let allUsers = document.getElementById("all-users");
-let text = "";
+$(document).ready(() => {
+    let users = JSON.parse(localStorage.getItem("users"));
 
-users.forEach(auxUser => {
-    text += "<br> Id: " + auxUser.id + "// Nome: " + auxUser.nome + " // Senha: " + auxUser.senha + " // Role: " + auxUser.role;
+    let text = "";
+    users.forEach(auxUser => {
+        text += "<br>Nome: " + auxUser.nome + " // Senha: " + auxUser.senha + " // Role: " + auxUser.role;
+    });
+
+     $("#all-users").text(text);
 });
-
-allUsers.innerHTML = text;

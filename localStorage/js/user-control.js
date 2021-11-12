@@ -1,16 +1,10 @@
-function cadastrar() {
+$("#btn-cadastrar").click(() => {
     let users = JSON.parse(localStorage.getItem("users"));
-    let nome = document.getElementById("nome").value;
-    let senha = document.getElementById("senha").value;
-    let permissao = document.getElementById("role").value;
-
-    let userId = users.length;
 
     let user = {
-        id: userId,
-        nome: nome, 
-        senha: senha,
-        role: permissao
+        nome: $("#nome").value, 
+        senha: $("#senha").value,
+        role: $("#role").value
     };
 
     users.forEach(auxUser => {
@@ -23,7 +17,7 @@ function cadastrar() {
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
     console.log(JSON.parse(localStorage.getItem("users")));
-}
+});
 
 function logar() {
     let users = JSON.parse(localStorage.getItem("users"));
