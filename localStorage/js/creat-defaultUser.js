@@ -1,5 +1,6 @@
-window.onload = function() {
+$(document).ready(() => {
     sessionStorage.clear();
+
     if (JSON.parse(localStorage.getItem("users")) == null) {
         let users = [];
         let defaultUser =  {
@@ -11,4 +12,4 @@ window.onload = function() {
         users.push(defaultUser);
         localStorage.setItem("users", JSON.stringify(users));
     }
-};
+});
