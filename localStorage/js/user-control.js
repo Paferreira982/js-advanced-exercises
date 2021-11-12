@@ -19,26 +19,22 @@ $("#btn-cadastrar").click(() => {
     console.log(JSON.parse(localStorage.getItem("users")));
 });
 
-function logar() {
+$("#btn-logar").click(() => {
     let users = JSON.parse(localStorage.getItem("users"));
-    let nome = document.getElementById("nome").value;
-    let senha = document.getElementById("senha").value;
 
     let user = {
-        nome: nome, 
-        senha: senha
+        nome: $("#nome").value, 
+        senha: $("#senha").value
     };
-
 
     let loguei = false;
     users.forEach(auxUser => {
         if (auxUser.nome == user.nome && auxUser.senha == user.senha) {
             sessionStorage.setItem("loggedUser", JSON.stringify(auxUser));
-            console.log("Login bem sucedido");
             window.location.replace("./home.html");
             loguei = true;
         }
     });
 
     if (!loguei) alert("Nome ou senha inválidos.");
-}
+});
