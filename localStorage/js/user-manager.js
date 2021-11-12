@@ -32,7 +32,18 @@ $("#btn-editar").click(() => {
 });
 
 $("#btn-excluir").click(() => {
-    excluir(JSON.parse(sessionStorage.getItem('searchedUser')));
+    let user = JSON.parse(sessionStorage.getItem('searchedUser'));
+    let users = JSON.parse(localStorage.getItem("users"));
+
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].nome == user.nome) {
+            users.splice(i,1);
+            localStorage.setItem("users", JSON.stringify(users));
+            $("#form-container").css("display","none");
+            clearSearchedUserFromSession();
+            break;
+        }
+    }
 });
 
 function removeUserFromList(user) {
@@ -47,20 +58,6 @@ function removeUserFromList(user) {
     }
 
     return users;
-}
-
-function excluir(user) {
-    let users = JSON.parse(localStorage.getItem("users"));
-
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].nome == user.nome) {
-            users.splice(i,1);
-            localStorage.setItem("users", JSON.stringify(users));
-            document.getElementById("form-container").style.display = "none";
-            clearSearchedUserFromSession();
-            return;
-        }
-    }
 }
 
 function locateByName(nameSearched) {
