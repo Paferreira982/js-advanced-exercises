@@ -8,24 +8,6 @@
     <title>Login</title>
 </head>
 
-<script>
-    window.onload = function() {
-        sessionStorage.clear();
-        if (JSON.parse(localStorage.getItem("users")) == null) {
-            let users = [];
-            let defaultUser =  {
-                id: 0,
-                nome: "root", 
-                senha: "root",
-                role: "admin"
-            };
-
-            users.push(defaultUser);
-            localStorage.setItem("users", JSON.stringify(users));
-        }
-    };
-</script>
-
 <body>
     <label for="nome">Nome:</label>
     <input id="nome" type="text" required> <br>
@@ -37,6 +19,8 @@
 
     <p>Default user: root / root</p>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./js/creat-defaultUser.js"></script>
     <script src="./js/user-control.js"></script>
 </body>
 
