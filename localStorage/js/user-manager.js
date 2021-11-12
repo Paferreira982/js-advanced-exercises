@@ -1,22 +1,19 @@
-function buscar() {
-    document.getElementById("form-container").style.display = "none";
-
-    let nameSearched = document.getElementById("searcher").value;
-    let user = locateByName(nameSearched);
+$("#btn-buscar").click(() => {
+    $("#form-container").css("display","none");
+    let user = locateByName($("#searcher").value);
 
     if (user) {
         sessionStorage.setItem("searchedUser", JSON.stringify(user));
-        document.getElementById("form-container").style.display = "inline-block";
+        $("#form-container").css("display","inline-block");
 
-        document.getElementById("nome").value = user.nome;
-        document.getElementById("senha").value = user.senha;
-        document.getElementById("role").value = user.role;
-
+        $("#nome").value = user.nome;
+        $("#senha").value = user.senha;
+        $("#role").value = user.role;
     } else {
         clearSearchedUserFromSession();
         alert("Usuário não encontrado.");
     }
-}
+});
 
 function editar() {
     let searchedUser = JSON.parse(sessionStorage.getItem("searchedUser"));

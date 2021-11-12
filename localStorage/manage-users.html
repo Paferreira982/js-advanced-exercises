@@ -13,7 +13,7 @@
 <body>
     <div>
         <input type="text" id="searcher" placeholder="Digite o nome a ser buscado">
-        <button onclick="buscar()">Buscar</button>
+        <button id="btn-buscar">Buscar</button>
     </div> <br>
 
     <div id="form-container">
@@ -29,8 +29,8 @@
         <label for="senha">Senha:</label>
         <input id="senha" type="password"> <br> <br>
 
-        <button onclick="editar()">Editar</button>
-        <button onclick="excluir(JSON.parse(sessionStorage.getItem('searchedUser')))">Excluir</button>
+        <button id="btn-editar">Editar</button>
+        <button id="btn-excluir" onclick="excluir(JSON.parse(sessionStorage.getItem('searchedUser')))">Excluir</button>
     </div>  <br> <br> <br>
 
     <a href="home.html" onclick="clearSearchedUserFromSession()">Home</a> <br>

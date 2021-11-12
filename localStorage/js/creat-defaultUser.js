@@ -3,7 +3,6 @@ window.onload = function() {
     if (JSON.parse(localStorage.getItem("users")) == null) {
         let users = [];
         let defaultUser =  {
-            id: 0,
             nome: "root", 
             senha: "root",
             role: "admin"
