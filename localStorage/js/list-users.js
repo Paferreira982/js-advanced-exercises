@@ -6,5 +6,5 @@ $(document).ready(() => {
         text += "<br>Nome: " + auxUser.nome + " // Senha: " + auxUser.senha + " // Role: " + auxUser.role;
     });
 
-     $("#all-users").text(text);
+     $("#all-users").append(text);
 });

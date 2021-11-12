@@ -1,9 +1,9 @@
 $("#btn-cadastrar").click(() => {
     let users = JSON.parse(localStorage.getItem("users"));
 
-    let nome = $("#nome").value;
-    let senha = $("#senha").value;
-    let role = $("#role").value;
+    let nome = $("#nome").val();
+    let senha = $("#senha").val();
+    let role = $("#role").val();
 
     let user = {
         nome: nome, 
@@ -26,8 +26,8 @@ $("#btn-cadastrar").click(() => {
 $("#btn-logar").click(() => {
     let users = JSON.parse(localStorage.getItem("users"));
 
-    let nome = $("#nome").value;
-    let senha = $("#senha").value;
+    let nome = $("#nome").val();
+    let senha = $("#senha").val();
 
     let user = {
         nome: nome, 

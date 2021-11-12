@@ -1,14 +1,14 @@
 $("#btn-buscar").click(() => {
     $("#form-container").css("display","none");
-    let user = locateByName($("#searcher").value);
+    let user = locateByName($("#searcher").val());
 
     if (user) {
         sessionStorage.setItem("searchedUser", JSON.stringify(user));
         $("#form-container").css("display","inline-block");
 
-        $("#nome").value = user.nome;
-        $("#senha").value = user.senha;
-        $("#role").value = user.role;
+        $("#nome").val(user.nome);
+        $("#senha").val(user.senha);
+        $("#role").val(user.role);
     } else {
         clearSearchedUserFromSession();
         alert("Usuário não encontrado.");
@@ -19,9 +19,9 @@ $("#btn-editar").click(() => {
     let searchedUser = JSON.parse(sessionStorage.getItem("searchedUser"));
 
     let users = removeUserFromList(searchedUser);
-    let nome = $("#nome").value;
-    let senha = $("#senha").value;
-    let role = $("#role").value;
+    let nome = $("#nome").val();
+    let senha = $("#senha").val();
+    let role = $("#role").val();
 
     let user = {
         nome: nome,
