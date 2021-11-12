@@ -15,25 +15,21 @@ $("#btn-buscar").click(() => {
     }
 });
 
-function editar() {
+$("#btn-editar").click(() => {
     let searchedUser = JSON.parse(sessionStorage.getItem("searchedUser"));
-    let nome = document.getElementById("nome").value;
-    let senha = document.getElementById("senha").value;
-    let role = document.getElementById("role").value;
 
     let users = deletar(searchedUser);
 
     let user = {
-        id: searchedUser.id,
-        nome: nome, 
-        senha: senha,
-        role: role
+        nome: $("#nome").value,
+        senha: $("#senha").value,
+        role: $("#role").value
     };
 
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
-    console.log(JSON.parse(localStorage.getItem("users")))
-}
+    console.log(JSON.parse(localStorage.getItem("users")));
+});
 
 function deletar(user) {
     let users = JSON.parse(localStorage.getItem("users"));
