@@ -1,10 +1,14 @@
 $("#btn-cadastrar").click(() => {
     let users = JSON.parse(localStorage.getItem("users"));
 
+    let nome = $("#nome").value;
+    let senha = $("#senha").value;
+    let role = $("#role").value;
+
     let user = {
-        nome: $("#nome").value, 
-        senha: $("#senha").value,
-        role: $("#role").value
+        nome: nome, 
+        senha: senha,
+        role: role
     };
 
     users.forEach(auxUser => {
@@ -22,9 +26,12 @@ $("#btn-cadastrar").click(() => {
 $("#btn-logar").click(() => {
     let users = JSON.parse(localStorage.getItem("users"));
 
+    let nome = $("#nome").value;
+    let senha = $("#senha").value;
+
     let user = {
-        nome: $("#nome").value, 
-        senha: $("#senha").value
+        nome: nome, 
+        senha: senha
     };
 
     let loguei = false;

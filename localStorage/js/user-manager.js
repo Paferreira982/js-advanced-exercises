@@ -19,11 +19,14 @@ $("#btn-editar").click(() => {
     let searchedUser = JSON.parse(sessionStorage.getItem("searchedUser"));
 
     let users = removeUserFromList(searchedUser);
+    let nome = $("#nome").value;
+    let senha = $("#senha").value;
+    let role = $("#role").value;
 
     let user = {
-        nome: $("#nome").value,
-        senha: $("#senha").value,
-        role: $("#role").value
+        nome: nome,
+        senha: senha,
+        role: role
     };
 
     users.push(user);
