@@ -18,7 +18,7 @@ $("#btn-buscar").click(() => {
 $("#btn-editar").click(() => {
     let searchedUser = JSON.parse(sessionStorage.getItem("searchedUser"));
 
-    let users = deletar(searchedUser);
+    let users = removeUserFromList(searchedUser);
 
     let user = {
         nome: $("#nome").value,
@@ -31,7 +31,11 @@ $("#btn-editar").click(() => {
     console.log(JSON.parse(localStorage.getItem("users")));
 });
 
-function deletar(user) {
+$("#btn-excluir").click(() => {
+    excluir(JSON.parse(sessionStorage.getItem('searchedUser')));
+});
+
+function removeUserFromList(user) {
     let users = JSON.parse(localStorage.getItem("users"));
 
     for (let i = 0; i < users.length; i++) {
