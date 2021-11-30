@@ -15,8 +15,10 @@ $("canvas-1").ready(function() {
                 y: e.clientY - rect.top
             }
 
+            context.beginPath();
             context.moveTo(initialPosition.x, initialPosition.y);
             context.lineTo(finalPosition.x, finalPosition.y);
+            context.strokeStyle = getRandomColor();
             context.stroke();
 
         } else {
@@ -33,3 +35,10 @@ $("canvas-1").ready(function() {
         finalPosition = null;
     });
 });
+
+function getRandomColor() {
+    let R = Math.floor(Math.random() * 256);
+    let G = Math.floor(Math.random() * 256);
+    let B = Math.floor(Math.random() * 256);
+    return "rgb(" + R + "," + G + "," + B + ")";
+};
