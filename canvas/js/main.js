@@ -3,7 +3,7 @@ $("canvas-1").ready(function() {
 
     let initialPosition, finalPosition;
 
-    $("#canvas-1").click(function(e){
+    $("#canvas-1").click(function(e) {
         let rect = this.getBoundingClientRect();
 
         if (initialPosition) {
@@ -31,6 +31,12 @@ $("canvas-1").ready(function() {
 
     $("#canvas-1").contextmenu(function(e) {
         e.preventDefault();
+        initialPosition = null;
+        finalPosition = null;
+    });
+
+    $("#reset-canvas").click(function() {
+        context.clearRect(0, 0, $("#canvas-1")[0].width, $("#canvas-1")[0].height);
         initialPosition = null;
         finalPosition = null;
     });
