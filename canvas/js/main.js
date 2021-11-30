@@ -35,13 +35,13 @@ $("canvas-1").ready(function() {
     $("#canvas-1").contextmenu(function(e) {
         e.preventDefault();
         initialPosition = null;
-        finalPosition = null;
+        finalPosition   = null;
     });
 
     $("#reset-canvas").click(function() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         initialPosition = null;
-        finalPosition = null;
+        finalPosition   = null;
     });
 });
 
@@ -52,9 +52,9 @@ function getRandomColor() {
     return "rgb(" + R + "," + G + "," + B + ")";
 };
 
-function configCanvas(canvas){
-  canvas.style.width ='100%';
-  canvas.style.height='100%';
-  canvas.width  = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+function configCanvas(canvas) {
+  canvas.style.width  = "100%";
+  canvas.style.height = "100%";
+  canvas.width        = canvas.offsetWidth;
+  canvas.height       = canvas.offsetHeight;
 }
