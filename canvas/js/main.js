@@ -1,5 +1,8 @@
 $("canvas-1").ready(function() {
-    let context = $("#canvas-1")[0].getContext("2d");
+    let canvas = $("#canvas-1")[0];
+    let context = canvas.getContext("2d");
+
+    configCanvas(canvas);
 
     let initialPosition, finalPosition;
 
@@ -36,7 +39,7 @@ $("canvas-1").ready(function() {
     });
 
     $("#reset-canvas").click(function() {
-        context.clearRect(0, 0, $("#canvas-1")[0].width, $("#canvas-1")[0].height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
         initialPosition = null;
         finalPosition = null;
     });
@@ -48,3 +51,10 @@ function getRandomColor() {
     let B = Math.floor(Math.random() * 256);
     return "rgb(" + R + "," + G + "," + B + ")";
 };
+
+function configCanvas(canvas){
+  canvas.style.width ='100%';
+  canvas.style.height='100%';
+  canvas.width  = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
