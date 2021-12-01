@@ -30,6 +30,7 @@ $("#canvas-1").ready(function() {
         return setInterval(function() {
             rect = getRandomRect();
             coord = getRandomPosition();
+            let color = getRandomColor();
 
             context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -43,7 +44,8 @@ $("#canvas-1").ready(function() {
             context.moveTo(coord.x, coord.y + rect.h); // Move para baixo
             context.lineTo(coord.x + rect.b, coord.y + rect.h); // Linha para a direita
 
-            context.strokeStyle = getRandomColor();
+            context.fillRect(coord.x, coord.y, rect.b, rect.h);
+            context.fillStyle = color;
             context.stroke();
         }, 3000);
     };
