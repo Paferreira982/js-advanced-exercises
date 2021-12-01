@@ -15,12 +15,17 @@ $("#canvas-1").ready(function() {
             y: e.clientY - bound.top
         }
 
+        showHitEffect(coordClick);
+
         if (verifyClick(coordClick, coord, rect)) {
             placar+=10;
             $("#placar").html("Placar: " + placar);
+
             context.clearRect(0, 0, canvas.width, canvas.height);
+
             coord = null;
             rect = null;
+
             clearInterval(interval);
             interval = generateRects();
         }
@@ -44,10 +49,34 @@ $("#canvas-1").ready(function() {
             context.moveTo(coord.x, coord.y + rect.h); // Move para baixo
             context.lineTo(coord.x + rect.b, coord.y + rect.h); // Linha para a direita
 
-            context.fillRect(coord.x, coord.y, rect.b, rect.h);
             context.fillStyle = color;
+            context.fillRect(coord.x, coord.y, rect.b, rect.h);
             context.stroke();
+            context.closePath();
         }, 3000);
+    };
+
+    function showHitEffect(coord) {
+        context.beginPath();
+        coord.x = coord.x - 10;
+        coord.y = coord.y - 10;
+        context.moveTo(coord.x, coord.y); // Posição inicial
+        context.lineTo(coord.x + 20, coord.y); // Linha para a direita
+        context.moveTo(coord.x + 20, coord.y); // Move para direita
+        context.lineTo(coord.x + 20, coord.y + 20); // Linha para baixo
+        context.moveTo(coord.x, coord.y); // Retorna para posição inicial
+        context.lineTo(coord.x, coord.y + 20); // Linha para baixo
+        context.moveTo(coord.x, coord.y + 20); // Move para baixo
+        context.lineTo(coord.x + 20, coord.y + 20); // Linha para a direita
+
+        context.fillStyle = "red";
+        context.fillRect(coord.x, coord.y, 20, 20);
+        context.stroke();
+        context.closePath();
+
+        setTimeout(function() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }, 500);
     };
 
     function getRandomPosition() {
