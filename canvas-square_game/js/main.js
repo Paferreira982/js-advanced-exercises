@@ -1,8 +1,11 @@
 $("#canvas-1").ready(function() {
     let canvas = $("#canvas-1")[0];
     let context = canvas.getContext("2d");
-    let placar = 0, coord, rect;
-    let drawnings = [];
+    let placar = 0, coord, rect, drawnings = [];
+
+    // Configurações
+    let minSize = 10, maxSize = 25; // Tamanhos que o retângulo (alvo) pode assumir.
+    let size = 20; // Tamanho do quadrado de explosão
 
     configCanvas();
 
@@ -19,11 +22,10 @@ $("#canvas-1").ready(function() {
         showHitEffect(coordClick);
 
         if (verifyClick(coordClick, coord, rect)) {
-            placar+=10;
+            placar += 10;
             $("#placar").html("Placar: " + placar);
 
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
+            deleteTarget();
             coord = null;
             rect = null;
 
@@ -34,13 +36,7 @@ $("#canvas-1").ready(function() {
 
     function generateRects() {
         return setInterval(function() {
-            for (let i = 0; i < drawnings.length; i++) {
-                if (drawnings[i].name == "rect") {
-                    drawnings[i].visible = false;
-                    drawn();
-                    break;
-                }
-            };
+            deleteTarget();
 
             rect = getRandomRect();
             coord = getRandomPosition();
@@ -62,8 +58,6 @@ $("#canvas-1").ready(function() {
     };
 
     function showHitEffect(coord) {
-        let size = 20; // Tamanho do lado do quadrado;
-
         let object = {
             name: "hit",
             path: [],
@@ -134,11 +128,28 @@ $("#canvas-1").ready(function() {
         drawnings.push(object);
     };
 
-    function getRandomPosition() {
-        return {
-            x: Math.floor(Math.random() * canvas.width),
-            y: Math.floor(Math.random() * canvas.height)
+    function deleteTarget() {
+        for (let i = 0; i < drawnings.length; i++) {
+            if (drawnings[i].name == "rect") {
+                drawnings[i].visible = false;
+                drawn();
+                break;
+            }
         };
+    }
+
+    function getRandomPosition() {
+        let coord = {
+            x: 0,
+            y: 0
+        };
+
+        do {
+            coord.x = Math.floor(Math.random() * canvas.width);
+            coord.y = Math.floor(Math.random() * canvas.height);
+        } while (coord.x < 50 || coord.y < 50 || coord.x > canvas.width - 50 || coord.y > canvas.height - 50);
+
+        return coord;
     };
 
     function configCanvas() {
@@ -159,8 +170,8 @@ $("#canvas-1").ready(function() {
     
     function getRandomRect() {
         return {
-            b: Math.floor(Math.random() * 10 + 26), 
-            h: Math.floor(Math.random() * 10 + 26)
+            b: Math.floor(Math.random() * minSize + maxSize+1), 
+            h: Math.floor(Math.random() * minSize + maxSize+1)
         };
     };
     
