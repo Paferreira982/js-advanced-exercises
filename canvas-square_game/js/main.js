@@ -34,26 +34,30 @@ $("#canvas-1").ready(function() {
 
     function generateRects() {
         return setInterval(function() {
+            for (let i = 0; i < drawnings.length; i++) {
+                if (drawnings[i].name == "rect") {
+                    drawnings[i].visible = false;
+                    drawn();
+                    break;
+                }
+            };
+
             rect = getRandomRect();
             coord = getRandomPosition();
-            let color = getRandomColor();
 
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            let object = {
+                name: "rect",
+                path: [],
+                color: getRandomColor(),
+                width: rect.b,
+                height: rect.h,
+                visible: true
+            };
 
-            context.beginPath();
-            context.moveTo(coord.x, coord.y); // Posição inicial
-            context.lineTo(coord.x + rect.b, coord.y); // Linha para a direita
-            context.moveTo(coord.x + rect.b, coord.y); // Move para direita
-            context.lineTo(coord.x + rect.b, coord.y + rect.h); // Linha para baixo
-            context.moveTo(coord.x, coord.y); // Retorna para posição inicial
-            context.lineTo(coord.x, coord.y + rect.h); // Linha para baixo
-            context.moveTo(coord.x, coord.y + rect.h); // Move para baixo
-            context.lineTo(coord.x + rect.b, coord.y + rect.h); // Linha para a direita
+            object = buildSquare(object, coord);
+            pushDrawn(object);
+            drawn();
 
-            context.fillStyle = color;
-            context.fillRect(coord.x, coord.y, rect.b, rect.h);
-            context.stroke();
-            context.closePath();
         }, 3000);
     };
 
@@ -64,30 +68,41 @@ $("#canvas-1").ready(function() {
             name: "hit",
             path: [],
             color: "red",
-            with: size,
+            width: size,
             height: size,
             visible: true
-        }
+        };
 
         coord.x = coord.x - size/2;
         coord.y = coord.y - size/2;
 
-        object.path.push({x: coord.x, y: coord.y});
-        object.path.push({x: coord.x + size, y: coord.y});
-        object.path.push({x: coord.x + size, y: coord.y});
-        object.path.push({x: coord.x + size, y: coord.y + size});
-        object.path.push({x: coord.x, y: coord.y});
-        object.path.push({x: coord.x, y: coord.y + size});
-        object.path.push({x: coord.x, y: coord.y + size});
-        object.path.push({x: coord.x + size, y: coord.y + size});
-
+        object = buildSquare(object, coord);
         pushDrawn(object);
         drawn();
 
         setTimeout(function() {
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawnings.forEach(aux => {
+                if (aux.name == "hit") {
+                    aux.visible = false;
+                    drawn();
+                    return;
+                }
+            });
         }, 500);
     };
+
+    function buildSquare(object, coord) {
+        object.path.push({x: coord.x, y: coord.y}); // Posição inicial
+        object.path.push({x: coord.x + object.width, y: coord.y}); // Linha para a direita
+        object.path.push({x: coord.x + object.width, y: coord.y}); // Move para direita
+        object.path.push({x: coord.x + object.width, y: coord.y + object.height}); // Linha para baixo
+        object.path.push({x: coord.x, y: coord.y}); // Retorna para posição inicial
+        object.path.push({x: coord.x, y: coord.y + object.height}); // Linha para baixo
+        object.path.push({x: coord.x, y: coord.y + object.height}); // Move para baixo
+        object.path.push({x: coord.x + object.width, y: coord.y + object.height}); // Linha para a direita
+
+        return object;
+    }
 
     function drawn() {
         context.clearRect(0, 0, canvas.width, canvas.height);
