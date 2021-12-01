@@ -5,7 +5,7 @@ $("#canvas-1").ready(function() {
 
     // Configurações
     let minSize = 10, maxSize = 25; // Tamanhos que o retângulo (alvo) pode assumir.
-    let size = 20; // Tamanho do quadrado de explosão
+    let size = 40; // Tamanho do quadrado de explosão
 
     configCanvas();
 
@@ -19,8 +19,6 @@ $("#canvas-1").ready(function() {
             y: e.clientY - bound.top
         }
 
-        showHitEffect(coordClick);
-
         if (verifyClick(coordClick, coord, rect)) {
             placar += 10;
             $("#placar").html("Placar: " + placar);
@@ -32,6 +30,8 @@ $("#canvas-1").ready(function() {
             clearInterval(interval);
             interval = generateRects();
         }
+
+        showHitEffect(coordClick);
     });
 
     function generateRects() {
@@ -58,19 +58,17 @@ $("#canvas-1").ready(function() {
     };
 
     function showHitEffect(coord) {
+        coord.x = coord.x - size/2;
+        coord.y = coord.y - size/2;
+
         let object = {
             name: "hit",
-            path: [],
-            color: "red",
+            path: coord,
             width: size,
             height: size,
             visible: true
         };
 
-        coord.x = coord.x - size/2;
-        coord.y = coord.y - size/2;
-
-        object = buildSquare(object, coord);
         pushDrawn(object);
         drawn();
 
@@ -102,17 +100,25 @@ $("#canvas-1").ready(function() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawnings.forEach(drawn => {
             if (drawn.visible) {
-                context.beginPath();
+                if (drawn.name == "hit") {
+                    let img = new Image();
+                    img.onload = function() {
+                        context.drawImage(img, drawn.path.x, drawn.path.y, size, size);
+                    };
+                    img.src = './img/explosion.png';
+                } else {
+                    context.beginPath();
 
-                for (let i = 0; i < drawn.path.length; i+=2) {
-                    context.moveTo(drawn.path[i].x, drawn.path[i].y);
-                    context.lineTo(drawn.path[i].x, drawn.path[i].y);
+                    for (let i = 0; i < drawn.path.length; i+=2) {
+                        context.moveTo(drawn.path[i].x, drawn.path[i].y);
+                        context.lineTo(drawn.path[i].x, drawn.path[i].y);
+                    }
+    
+                    context.fillStyle = drawn.color;
+                    context.fillRect(drawn.path[0].x, drawn.path[0].y, drawn.width, drawn.height);
+                    context.stroke();
+                    context.closePath();
                 }
-
-                context.fillStyle = drawn.color;
-                context.fillRect(drawn.path[0].x, drawn.path[0].y, drawn.width, drawn.height);
-                context.stroke();
-                context.closePath();
             }
         });
     };
