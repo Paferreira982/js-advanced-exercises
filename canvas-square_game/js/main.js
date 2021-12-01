@@ -2,6 +2,7 @@ $("#canvas-1").ready(function() {
     let canvas = $("#canvas-1")[0];
     let context = canvas.getContext("2d");
     let placar = 0, coord, rect;
+    let drawnings = [];
 
     configCanvas();
 
@@ -57,26 +58,65 @@ $("#canvas-1").ready(function() {
     };
 
     function showHitEffect(coord) {
-        context.beginPath();
-        coord.x = coord.x - 10;
-        coord.y = coord.y - 10;
-        context.moveTo(coord.x, coord.y); // Posição inicial
-        context.lineTo(coord.x + 20, coord.y); // Linha para a direita
-        context.moveTo(coord.x + 20, coord.y); // Move para direita
-        context.lineTo(coord.x + 20, coord.y + 20); // Linha para baixo
-        context.moveTo(coord.x, coord.y); // Retorna para posição inicial
-        context.lineTo(coord.x, coord.y + 20); // Linha para baixo
-        context.moveTo(coord.x, coord.y + 20); // Move para baixo
-        context.lineTo(coord.x + 20, coord.y + 20); // Linha para a direita
+        let size = 20; // Tamanho do lado do quadrado;
 
-        context.fillStyle = "red";
-        context.fillRect(coord.x, coord.y, 20, 20);
-        context.stroke();
-        context.closePath();
+        let object = {
+            name: "hit",
+            path: [],
+            color: "red",
+            with: size,
+            height: size,
+            visible: true
+        }
+
+        coord.x = coord.x - size/2;
+        coord.y = coord.y - size/2;
+
+        object.path.push({x: coord.x, y: coord.y});
+        object.path.push({x: coord.x + size, y: coord.y});
+        object.path.push({x: coord.x + size, y: coord.y});
+        object.path.push({x: coord.x + size, y: coord.y + size});
+        object.path.push({x: coord.x, y: coord.y});
+        object.path.push({x: coord.x, y: coord.y + size});
+        object.path.push({x: coord.x, y: coord.y + size});
+        object.path.push({x: coord.x + size, y: coord.y + size});
+
+        pushDrawn(object);
+        drawn();
 
         setTimeout(function() {
             context.clearRect(0, 0, canvas.width, canvas.height);
         }, 500);
+    };
+
+    function drawn() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        drawnings.forEach(drawn => {
+            if (drawn.visible) {
+                context.beginPath();
+
+                for (let i = 0; i < drawn.path.length; i+=2) {
+                    context.moveTo(drawn.path[i].x, drawn.path[i].y);
+                    context.lineTo(drawn.path[i].x, drawn.path[i].y);
+                }
+
+                context.fillStyle = drawn.color;
+                context.fillRect(drawn.path[0].x, drawn.path[0].y, drawn.width, drawn.height);
+                context.stroke();
+                context.closePath();
+            }
+        });
+    };
+
+    function pushDrawn(object) {
+        for (let i = 0; i < drawnings.length; i++) {
+            if (drawnings[i].name == object.name) {
+                drawnings.splice(i,1);
+                break;
+            }
+        }
+
+        drawnings.push(object);
     };
 
     function getRandomPosition() {
