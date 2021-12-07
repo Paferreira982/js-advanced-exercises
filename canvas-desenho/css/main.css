@@ -1,0 +1,15 @@
+body {
+    background-color: rgb(204, 204, 204);
+}
+
+button {
+    margin-top: 1vh;
+}
+
+canvas {
+    background-color: white;
+}
+
+.container {
+    margin-top: 10vh;
+}
