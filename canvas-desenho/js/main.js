@@ -3,7 +3,7 @@ $("canvas").ready(function() {
     let context = canvas.getContext("2d");
     let drawnings = [], drawn = [], lines = [], desenhando = false;
 
-    configCanvas(); // Configura altura e largura do canvas.
+    configCanvas();
 
     $("canvas").on("mousedown", function(evt) {
         let rect = this.getBoundingClientRect();
@@ -88,7 +88,6 @@ $("canvas").ready(function() {
         context.beginPath();
     }
 
-    // Função que configura altura e largura do canvas.
     function configCanvas() {
         canvas.style.width  = "100%";
         canvas.style.height = "100%";
