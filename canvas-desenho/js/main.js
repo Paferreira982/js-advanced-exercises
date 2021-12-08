@@ -10,12 +10,17 @@ $("canvas").ready(function() {
     configCanvas();
 
     $("canvas").on("mousedown", function(evt) {
-        context.beginPath();
         let rect = this.getBoundingClientRect();
+        let coordenadas = {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        }
+
+        context.beginPath();
         desenhando = true;
         lines.color = $("input").val();
-        lines.coords.push({x: evt.clientX - rect.left, y: evt.clientY - rect.top});
-        context.moveTo(evt.clientX - rect.left, evt.clientY - rect.top);
+        lines.coords.push(coordenadas);
+        context.moveTo(coordenadas.x, coordenadas.y);
     });
 
     $("canvas").on("mouseup", function() {
@@ -31,8 +36,13 @@ $("canvas").ready(function() {
     $("canvas").on("mousemove", function(evt) {
         if (desenhando) {
             let rect = this.getBoundingClientRect();
-            lines.coords.push({x: evt.clientX - rect.left, y: evt.clientY - rect.top});
-            context.lineTo(evt.clientX - rect.left, evt.clientY - rect.top);
+            let coordenadas = {
+                x: evt.clientX - rect.left,
+                y: evt.clientY - rect.top
+            }
+
+            lines.coords.push(coordenadas);
+            context.lineTo(coordenadas.x, coordenadas.y);
             context.strokeStyle = lines.color;
             context.stroke();
         }
