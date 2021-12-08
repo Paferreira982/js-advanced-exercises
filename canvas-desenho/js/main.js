@@ -1,33 +1,44 @@
 $("canvas").ready(function() {
     let canvas = $("canvas")[0];
     let context = canvas.getContext("2d");
-    let drawnings = [], drawn = [], lines = [], desenhando = false;
+    let drawnings = [], drawn = [], desenhando = false;
+    let lines = {
+        color: "",
+        coords: []
+    }
 
     configCanvas();
 
     $("canvas").on("mousedown", function(evt) {
+        context.beginPath();
         let rect = this.getBoundingClientRect();
         desenhando = true;
-        lines.push({x: evt.clientX - rect.left, y: evt.clientY - rect.top});
+        lines.color = $("input").val();
+        lines.coords.push({x: evt.clientX - rect.left, y: evt.clientY - rect.top});
         context.moveTo(evt.clientX - rect.left, evt.clientY - rect.top);
     });
 
-    $("canvas").on("mouseup", () => {
+    $("canvas").on("mouseup", function() {
         desenhando = false;
         drawn.push(lines);
-        lines = [];
+        lines = {
+            color: "",
+            coords: []
+        }
+        context.closePath();
     });
 
     $("canvas").on("mousemove", function(evt) {
         if (desenhando) {
             let rect = this.getBoundingClientRect();
-            lines.push({x: evt.clientX - rect.left, y: evt.clientY - rect.top});
+            lines.coords.push({x: evt.clientX - rect.left, y: evt.clientY - rect.top});
             context.lineTo(evt.clientX - rect.left, evt.clientY - rect.top);
+            context.strokeStyle = lines.color;
             context.stroke();
         }
     });
 
-    $("button").click(function(){
+    $("button").click( function() {
         if ($(this).attr("class").includes("limpa"))
             limparCanvas();
 
@@ -61,12 +72,15 @@ $("canvas").ready(function() {
 
                 if (drawn.length > 0) {
                     for (let i = 0; i < drawn.length; i++) {
-                        context.moveTo(drawn[i][0].x, drawn[i][0].y);
+                        context.beginPath();
+                        context.moveTo(drawn[i].coords[0].x, drawn[i].coords[0].y);
     
-                        for (let j = 1; j < drawn[i].length; j++) {
-                            context.lineTo(drawn[i][j].x, drawn[i][j].y);
+                        for (let j = 1; j < drawn[i].coords.length; j++) {
+                            context.lineTo(drawn[i].coords[j].x, drawn[i].coords[j].y);
+                            context.strokeStyle = drawn[i].color;
                             context.stroke();
                         }
+                        context.closePath();
                     }
     
                     drawn = [];
@@ -82,8 +96,12 @@ $("canvas").ready(function() {
     })
 
     function limparCanvas() {
-        drawn = []; 
-        lines = [];
+        drawn = [];
+        lines = {
+            color: "",
+            coords: []
+        }
+
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.beginPath();
     }

@@ -24,7 +24,6 @@ button {
 }
 
 input[type="color"] {
-	-webkit-appearance: none;
 	border: none;
 }
 
